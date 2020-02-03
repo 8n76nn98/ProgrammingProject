@@ -3,15 +3,20 @@ class Alien {
  /* declare variables for alien position, direction of movement and appearance */
  int x;
  int y;
- int dx;
+ float dx;
  boolean hasTransformed;
- int dy;
+ float dy;
+ float timeIncrement= 1.01;
  int downCounter;
  int prevDirection;
  int explodeCounter;
  int explodeChecker;
  PImage imageToUse;
 
+ int mySin(int x)
+ {
+  return 100 + (int)(100*Math.sin(2*Math.PI*x*1.0/200));
+ }
  /* Constructor is passed the x and y position where the alien is to
  be created, plus the image to be used to draw the alien */
  
@@ -53,8 +58,8 @@ class Alien {
           downCounter = alienImage.height;
         }
         
-        x+=dx;
-        y+= dy;
+        x+=dx*timeIncrement;
+        y+= dy*timeIncrement;
         
         if(x == SCREEN_X-alienImage.width)
         {
@@ -69,6 +74,16 @@ class Alien {
           dx=0;
           downCounter--;
         }
+   }
+   else if(hasTransformed = true)
+   {
+     x+=(int)random(1,5);
+     y+=(int)random(1,5);
+     if(x>=1279 && y>=719)
+     {
+       x= 0;
+       y = 0;
+     }
    }
    
    
