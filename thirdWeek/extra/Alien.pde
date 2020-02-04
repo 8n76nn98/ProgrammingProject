@@ -6,9 +6,6 @@ class Alien {
  float dx;
  boolean hasTransformed;
  float dy;
- float radius;
- float theta;
- float roateSpeed;
  float timeIncrement= 1.01;
  int downCounter;
  int prevDirection;
@@ -18,16 +15,13 @@ class Alien {
 
  int mySin(int x)
  {
-  return 40 + (int)(100*Math.sin(2*Math.PI*x*1.0/2000000));
+  return 100 + (int)(100*Math.sin(2*Math.PI*x*1.0/200));
  }
  /* Constructor is passed the x and y position where the alien is to
  be created, plus the image to be used to draw the alien */
  
  Alien(int xpos, int ypos, PImage alienImage)
  {
-    radius = 50.0;
-    theta =TWO_PI;
-    roateSpeed = 0.05;
     /* set up the new alien object */ 
     x = xpos;
     y = ypos;
@@ -81,15 +75,40 @@ class Alien {
           downCounter--;
         }
    }
-   else
+   else if(hasTransformed = true)
    {
-     x += (int)random(1,3);
-     y+=(int)random(1,3);
+     
+     y+=(int)random(1,5);
+     if(y>0 && y<120)
+     {
+       x+=(int)random(1,5);
+     }
+     if(y>120 && y<240)
+     {
+       x-=(int)random(1,5);
+     }
+     if(y>240 && y<360)
+     {
+       x+=(int)random(1,20);
+     }
+     if(y>360 && y<480)
+     {
+       x-=(int)random(1,30);
+     }
+     if(y>480 && y<600)
+     {
+       x+=(int)random(1,10);
+     }
+     if(y>600 && y<720)
+     {
+       x-=(int)random(1,5);
+     }
+     
      
      if(x>=1279 || y>=719)
      {
-       x = (int)random(100,1000);
-       y =(int)random(100,700);
+       x= (int)random(1,1000);
+       y = (int)random(1,700);
      }
    }
    

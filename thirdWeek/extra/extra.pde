@@ -3,7 +3,10 @@ Alien[] alienArray;
 PImage alienImage;
 PImage explodeImage;
 PImage disappearImage;
-
+import ddf.minim.*;
+AudioPlayer player;
+AudioPlayer sound;
+Minim minim;
 int xPos = 1;
 int yPos = 1;
 
@@ -18,6 +21,10 @@ void setup()
   frameRate(700);
   /* initialise the array */
   init_aliens(alienArray, alienImage);
+  minim = new Minim(this);
+  
+  player = minim.loadFile("/Users/mingshi/Desktop/processingHomwwork/thirdWeek/extra/Jingle-Bells.mp3", 2048);
+  player.play();
 }
 
 void init_aliens (Alien[] alienArray, PImage alienImage)
@@ -38,7 +45,7 @@ void draw()
   for(int i=0; i<alienArray.length; i++)
   {
     alienArray[i].moveRegular();
-    if(i<4)
+    if(i<6)
     {
        alienArray[i].explode();
     }
