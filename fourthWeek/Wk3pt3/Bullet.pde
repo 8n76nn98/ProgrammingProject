@@ -31,19 +31,22 @@ class Bullet {
      if(mode ==0)
      {
        fill(bulletColor);
+       rect(bulletXpos, bulletYpos, BULLETWIDTH, BULLETHEIGHT);
      }
      else if(mode ==1)
      {
        color bulletColor = color(#21D8CB);
        fill(bulletColor);
+       ellipse(bulletXpos, bulletYpos,BULLETWIDTH, BULLETHEIGHT);
      }
        else if(mode ==2)
      {
        color bulletColor = color(#D89221);
        fill(bulletColor);
+       triangle(bulletXpos+10,bulletYpos-10,bulletXpos,bulletYpos,bulletXpos+10,bulletYpos);
      }
     
-     rect(bulletXpos, bulletYpos, BULLETWIDTH, BULLETHEIGHT);
+     //rect(bulletXpos, bulletYpos, BULLETWIDTH, BULLETHEIGHT);
  }
  
  void collide(Alien[] alienArray)
@@ -62,20 +65,9 @@ class Bullet {
  {
    if(bulletYpos >= 0-bulletImage.height && bulletYpos < 720 - bulletImage.height/2)
    {
-     if(mode ==0)
-     {
-       bulletYpos-=2;
-     }
-     else if(mode ==1)
-     {
-       bulletYpos-=6;
      
-     }
-     else if(mode ==2)
-     {
-       bulletYpos-=3;
-       
-     }
+     bulletYpos-=2;
+    
    }
    
    else

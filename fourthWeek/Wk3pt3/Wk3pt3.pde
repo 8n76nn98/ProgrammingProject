@@ -55,7 +55,7 @@ void draw()
   //  alienArray[i].explode();
     alienArray[i].draw();
     alienArray[i].collisionPowerUp(thePlayer.xpos, thePlayer.ypos, thePlayer);
-    if((i%2==0)&& !alienArray[i].bonus && alienArray[i].die==false)
+    if( !alienArray[i].bonus && alienArray[i].die==false)
     {
       println("currentIndex is "+i);
       alienArray[i].powerUp();
