@@ -12,8 +12,9 @@ class Alien {
  int dy;
  int downCounter;
  int prevDirection;
- int explodeCounter;
- int explodeChecker;
+ int pathChangeCounter;
+ boolean change;// to counter which to transformed
+ int pathChangeChecker;
  boolean die ;
  PImage imageToUse;
  
@@ -38,13 +39,66 @@ class Alien {
     dy = 0;
     downCounter = alienImage.height;
     prevDirection = A_BACKWARD;
-    
+    pathChangeCounter = 0;
+    pathChangeChecker =(int) random(0, (SCREEN_X*8)); // randomly selete the frame number 
     imageToUse = alienImage;
     
     status = ALIEN_ALIVE;
     bonus = false;
  }
-  
+ 
+ 
+ void moveSinPath()
+ {
+   if(die == false)
+   {
+     y+=(int)random(1,2);
+     y++;
+     println("speed of y"+y);
+     if(y>0 && y<120)
+     {
+       x+=(int)random(1,2);
+     }
+     if(y>120 && y<240)
+     {
+       x-=(int)random(1,2);
+     }
+     if(y>240 && y<360)
+     {
+       x+=(int)random(1,3);
+     }
+     if(y>360 && y<480)
+     {
+       x-=(int)random(1,3);
+     }
+     if(y>480 && y<600)
+     {
+       x+=(int)random(1,3);
+     }
+     if(y>600 && y<720)
+     {
+       x-=(int)random(1,5);
+     }
+     
+     
+     if(x>=1279 || y>=719)
+     {
+       x= (int)random(1,1000);
+       y = (int)random(1,700);
+     }
+     
+   }
+   else if(die == true)
+    {
+       int stopX = x;
+        x =stopX;
+        int stopY = y;
+        y = stopY;
+      
+    }
+    
+   
+ }
  void move()
  {
     /* Move the alien according to the instructions in the exercise */   
@@ -105,6 +159,7 @@ class Alien {
   {
     /* Draw the alien using the image() method demonstrated in class */
     image(imageToUse, x, y);  
+    pathChangeCounter++;
      
     
   }
@@ -115,6 +170,7 @@ class Alien {
       {
         imageToUse = explodeImage;
         die = true;
+        dieSound.play();
         
       }
       

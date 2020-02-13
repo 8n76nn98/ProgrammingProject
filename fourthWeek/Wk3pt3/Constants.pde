@@ -14,3 +14,5 @@ int BULLETWIDTH=20;
 int BULLETHEIGHT=20;
 int BONUS_HEIGHT = 36;
 int BONUS_WIDTH = 25;
+
+SoundFile shootSound, dieSound, hitSound;

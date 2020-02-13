@@ -1,4 +1,6 @@
 /* Declare an array of Aliens */
+import processing.sound.*;
+
 Alien[] alienArray;
 ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 Bullet theBullet;
@@ -18,9 +20,16 @@ void setup()
   alienImage = loadImage("/Users/mingshi/Desktop/processingHomwwork/thirdWeek/Wk3pt3/alien.GIF");
   explodeImage = loadImage("/Users/mingshi/Desktop/processingHomwwork/fourthWeek/Wk3pt3/exploding.GIF");
   size(1280, 720);
+  init_sounds();
   frameRate(500);
   /* initialise the array */
   init_aliens(alienArray, alienImage);
+}
+
+void init_sounds(){
+  shootSound = new SoundFile(this, "/Users/mingshi/Desktop/processingHomwwork/fourthWeek/Wk3pt3/pew.mp3");
+  dieSound = new SoundFile(this, "/Users/mingshi/Desktop/processingHomwwork/fourthWeek/Wk3pt3/diesound.mp3");
+  hitSound = new SoundFile(this, "/Users/mingshi/Desktop/processingHomwwork/fourthWeek/Wk3pt3/punch.mp3");
 }
 
 void init_aliens (Alien[] alienArray, PImage alienImage)
@@ -52,10 +61,15 @@ void draw()
   for(int i=0; i<alienArray.length; i++)
   {
     alienArray[i].move();
+    if(i<2)
+    {
+      alienArray[i].moveSinPath();
+      
+    }
   //  alienArray[i].explode();
     alienArray[i].draw();
     alienArray[i].collisionPowerUp(thePlayer.xpos, thePlayer.ypos, thePlayer);
-    if( !alienArray[i].bonus && alienArray[i].die==false)
+    if((i%2==0)&& !alienArray[i].bonus && alienArray[i].die==false)
     {
       println("currentIndex is "+i);
       alienArray[i].powerUp();
@@ -64,6 +78,7 @@ void draw()
 }
 void mousePressed()
 {
+  shootSound.play();
   
   if(thePlayer.bulletMode == 1)
   {
@@ -78,7 +93,7 @@ void mousePressed()
   }
   else
   {
-    bulletList.add(new Bullet(thePlayer.xpos, thePlayer.ypos,3));
+    bulletList.add(new Bullet(thePlayer.xpos, thePlayer.ypos,0));
   }
   
 //  theBullet = new Bullet(bulletImage, thePlayer.xpos+, thePlayer.ypos);

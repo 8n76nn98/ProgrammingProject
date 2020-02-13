@@ -8,9 +8,10 @@ class Bullet {
   
    Bullet(int x, int y,int currentMode){
    
-   mode = currentMode;
+   
    bulletXpos = x + (playerImage.width/2);
    bulletYpos = y;
+   mode = currentMode;
    
  }
  int x()
@@ -43,10 +44,11 @@ class Bullet {
      {
        color bulletColor = color(#D89221);
        fill(bulletColor);
-       triangle(bulletXpos+10,bulletYpos-10,bulletXpos,bulletYpos,bulletXpos+10,bulletYpos);
+       triangle(bulletXpos+20,bulletYpos-20,bulletXpos,bulletYpos,bulletXpos+10,bulletYpos);
+    
      }
     
-     //rect(bulletXpos, bulletYpos, BULLETWIDTH, BULLETHEIGHT);
+    // rect(bulletXpos, bulletYpos, BULLETWIDTH, BULLETHEIGHT);
  }
  
  void collide(Alien[] alienArray)
@@ -57,17 +59,17 @@ class Bullet {
      if(bulletYpos <= testAlien.y+alienImage.height && (bulletYpos + (bulletImage.height/8)) > testAlien.y && bulletXpos >=testAlien.x && bulletXpos <= testAlien.x + alienImage.width)
      {
        testAlien.explode();
+       hitSound.play();
        println("shooting !");
      }
    }
+   //hitSound.play();
  }
  void move()
  {
    if(bulletYpos >= 0-bulletImage.height && bulletYpos < 720 - bulletImage.height/2)
    {
-     
      bulletYpos-=2;
-    
    }
    
    else
